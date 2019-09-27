@@ -41,5 +41,7 @@ resource "kubernetes_namespace" "this" {
 module "keycloak_gatekeeper" {
   source = "../.."
 
-  namespace = kubernetes_namespace.this.metadata.0.name
+  namespace     = kubernetes_namespace.this.metadata.0.name
+  configuration = file("${path.root}/templates/configuration.yaml")
+  ingress_host  = "https://example.local"
 }
