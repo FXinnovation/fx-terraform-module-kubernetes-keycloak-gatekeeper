@@ -43,5 +43,5 @@ module "keycloak_gatekeeper" {
 
   namespace     = kubernetes_namespace.this.metadata.0.name
   configuration = file("${path.root}/templates/configuration.yaml")
-  ingress_host  = "https://example.com"
+  ingress_host  = "example.com"
 }
