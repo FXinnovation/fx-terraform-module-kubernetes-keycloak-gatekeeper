@@ -106,7 +106,7 @@ resource "kubernetes_deployment" "this" {
 
           liveness_probe {
             tcp_socket {
-              port = "http"
+              port = 3000
             }
 
             initial_delay_seconds = 10
@@ -115,7 +115,7 @@ resource "kubernetes_deployment" "this" {
 
           readiness_probe {
             tcp_socket {
-              port = "http"
+              port = 3000
             }
 
             initial_delay_seconds = 10
