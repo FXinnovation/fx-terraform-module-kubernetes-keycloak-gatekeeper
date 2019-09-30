@@ -217,14 +217,14 @@ resource "kubernetes_ingress" "this" {
             service_name = kubernetes_service.this.metadata.0.name
             service_port = "http"
           }
-          path_regex = "/"
+          path = "/"
         }
       }
     }
 
     tls {
       secret_name = "${var.ingress_name}-tls"
-      host        = var.ingress_host
+      hosts       = [var.ingress_host]
     }
   }
 }
