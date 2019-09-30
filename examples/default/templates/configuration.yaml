@@ -1,6 +1,6 @@
 client-id: some_id
 client-secret: some_secret
-discovery-url: https://idp.dazzlingwrench.fxinnovation.com/auth/realms/fxinnovation
+discovery-url: https://idp.dazzlingwrench.fxinnovation.com/auth/realms/fxinnovation.com
 enable-default-deny: true
 listen: 127.0.0.1:3000
 redirection-url: https://example.com
