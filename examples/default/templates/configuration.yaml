@@ -1,6 +1,6 @@
-client-id: <CLIENT_ID>
-client-secret: <CLIENT_SECRET>
-discovery-url: https://keycloak.example.com/auth/realms/<REALM_NAME>
+client-id: some_id
+client-secret: some_secret
+discovery-url: https://idp.dazzlingwrench.fxinnovation.com/auth/realms/fxinnovation
 enable-default-deny: true
 listen: 127.0.0.1:3000
 redirection-url: http://127.0.0.1:3000
