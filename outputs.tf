@@ -10,7 +10,7 @@ output "deployment_name" {
 
 output "service_name" {
   description = "Name of the service created by this module."
-  value       = var.enabeld ? var.service_name : ""
+  value       = var.enabled ? var.service_name : ""
 }
 
 output "config_map_name" {

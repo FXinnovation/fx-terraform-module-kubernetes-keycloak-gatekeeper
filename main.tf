@@ -71,7 +71,7 @@ resource "kubernetes_deployment" "this" {
         volume {
           name = "configuration"
           config_map {
-            name = element(concat(kubernetes_config_map.this.metadata.*.name, list("")), 0)
+            name = element(concat(kubernetes_config_map.this.*.metadata.0.name, list("")), 0)
             items {
               key  = "gatekeeper.yaml"
               path = "gatekeeper.yaml"
@@ -213,7 +213,7 @@ resource "kubernetes_ingress" "this" {
 
   spec {
     backend {
-      service_name = element(concat(kubernetes_service.this.metadata.*.name, list("")), 0)
+      service_name = element(concat(kubernetes_service.this.*.metadata.0.name, list("")), 0)
       service_port = "http"
     }
 
@@ -222,7 +222,7 @@ resource "kubernetes_ingress" "this" {
       http {
         path {
           backend {
-            service_name = element(concat(kubernetes_service.this.metadata.*.name, list("")), 0)
+            service_name = element(concat(kubernetes_service.this.*.metadata.0.name, list("")), 0)
             service_port = "http"
           }
           path = "/"
