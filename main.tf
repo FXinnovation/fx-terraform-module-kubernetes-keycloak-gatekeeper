@@ -28,6 +28,8 @@ resource "random_string" "selector" {
 #####
 
 resource "kubernetes_deployment" "this" {
+  count = var.enabled ? 1 : 0
+
   metadata {
     name      = var.deployment_name
     namespace = var.namespace
@@ -69,7 +71,7 @@ resource "kubernetes_deployment" "this" {
         volume {
           name = "configuration"
           config_map {
-            name = kubernetes_config_map.this.metadata.0.name
+            name = element(concat(kubernetes_config_map.this.metadata.*.name, list("")), 0)
             items {
               key  = "gatekeeper.yaml"
               path = "gatekeeper.yaml"
@@ -132,6 +134,8 @@ resource "kubernetes_deployment" "this" {
 #####
 
 resource "kubernetes_config_map" "this" {
+  count = var.enabled ? 1 : 0
+
   metadata {
     name      = var.config_map_name
     namespace = var.namespace
@@ -156,6 +160,8 @@ resource "kubernetes_config_map" "this" {
 #####
 
 resource "kubernetes_service" "this" {
+  count = var.enabled ? 1 : 0
+
   metadata {
     name      = var.service_name
     namespace = var.namespace
@@ -189,6 +195,8 @@ resource "kubernetes_service" "this" {
 #####
 
 resource "kubernetes_ingress" "this" {
+  count = var.enabled ? 1 : 0
+
   metadata {
     name      = var.ingress_name
     namespace = var.namespace
@@ -205,7 +213,7 @@ resource "kubernetes_ingress" "this" {
 
   spec {
     backend {
-      service_name = kubernetes_service.this.metadata.0.name
+      service_name = element(concat(kubernetes_service.this.metadata.*.name, list("")), 0)
       service_port = "http"
     }
 
@@ -214,7 +222,7 @@ resource "kubernetes_ingress" "this" {
       http {
         path {
           backend {
-            service_name = kubernetes_service.this.metadata.0.name
+            service_name = element(concat(kubernetes_service.this.metadata.*.name, list("")), 0)
             service_port = "http"
           }
           path = "/"

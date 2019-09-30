@@ -97,3 +97,8 @@ variable "configuration" {
   description = "Keycloak configuration as a yaml string."
   type        = string
 }
+
+variable "enabled" {
+  description = "Whether or not to enable this module."
+  default     = true
+}
